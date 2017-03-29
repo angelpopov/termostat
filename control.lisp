@@ -1,5 +1,3 @@
-
-
 (defun copy-stream (in out)
    (loop for line = (read-line in nil nil)
          while line
@@ -13,10 +11,8 @@
 (defun temp()
   (let ((temp (with-input-from-string (f (system "./temp.sh"))
 			  (read f))))
-    
-    temp
-    
-    ))
+    (sleep 0.5)
+    temp ))
 
 (defun wait-for(pred)
   (loop :while (funcall pred) ))
@@ -25,9 +21,9 @@
   (if (< temp 23.5)
       (progn
 	(print (system "./relayOn.sh")) 
-	(loop :while (< (temp) 23.562) do (format t "~%Cold:~A" (temp)) (sleep 3)))
+	(loop :while (< (temp) 23.562) do (format t "~%Cold:~A" (temp)) ))
     (progn
       (print (system "./relayOff.sh")) 
-      (loop :while (>= (temp) 23.5) do (format t "~%Hot:~A" (temp)) (sleep 3)))
+      (loop :while (>= (temp) 23.5) do (format t "~%Hot:~A" (temp)) ))
   ))
 (loop do (act (temp)))
